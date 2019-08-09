@@ -11,5 +11,9 @@ class Gossip < ApplicationRecord
 	has_many :tags, through: :join_table_gossip_tags
 	has_many :comments
 	has_many :likes
+
+	def pre_like(user)
+    self.likes.find { |like| like.user_id == user.id}
+    end
 	
 end

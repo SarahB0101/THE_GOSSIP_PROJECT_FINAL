@@ -17,7 +17,10 @@ class SessionsController < ApplicationController
 	    session[:user_id] = user.id
 	    # redirige où tu veux, avec un flash ou pas
 	    flash[:success_signin] = " "
-	    redirect_to user_path(session[:user_id])
+	    
+	    log_in user
+    	params[:remember_me] == '1' ? remember(user) : forget(user)
+	    redirect_to index_path #(session[:user_id])
 	  else
 	    flash.now[:danger] = 'Invalid email/password combination'
 	    render 'new'
@@ -27,9 +30,9 @@ class SessionsController < ApplicationController
 
 
 	def destroy
-
-	session.delete(:user_id)
-	redirect_to index_path
+		log_out if logged_in?
+	# session.delete(:user_id)
+		redirect_to index_path
 		
 	end
 end

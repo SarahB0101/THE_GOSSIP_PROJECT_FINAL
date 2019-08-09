@@ -85,6 +85,17 @@
 		  			 	<%= link_to "#{@gossip.user.city.name}", city_path(@gossip.user.city) %> 
 
 		  			 </footer></blockquote> 
+
+		  			 
+		  			 <% like = @gossip.pre_like(current_user)%>
+                <% if like %>
+                <%= link_to "Like #{@gossip.likes.count}", gossip_like_path(@gossip, like), method: :delete, class:"btn text-white btn-danger btn-sm"%>
+                <% else %>
+                <%= link_to "Like #{@gossip.likes.count}", gossip_likes_path(@gossip), method: :post, class:"btn text-red btn-light btn-sm"%>
+                <% end %>
+
+
+
 		  		<% if current_user == @gossip.user%>	 
 		      	<button class=" btn btn-outline-dark btn-lg" role="button" aria-pressed="true"><%=link_to 'Éditer le gossip ?', edit_gossip_path %> </button>	
 		      	
@@ -111,8 +122,10 @@
 						<div class="card-body">
 					  		<h3 class="card-title"><%=link_to "#{comment.user.first_name}", user_path(comment.user.id) %> </h3>
 					  		<p class="card-text"><%= comment.content %></p>
+					  		
+					  		<% if current_user == comment.user%>
 					  		<button class=" btn btn-outline-dark btn-lg"><%=link_to 'Éditer le commentaire', edit_gossip_comment_path(@gossip, comment) %> </button>
-
+					  		<%end%>
 					          	
 					    </div>	
 			    	</div> 

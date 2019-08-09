@@ -43,7 +43,12 @@
 	      <%= password_field_tag 'password', '', class: "form-control", placeholder:"Entrez votre mot de passe" %>
 	      <br/> <br/>
 	      
-
+	      	<%= label_tag :remember_me, class: "checkbox inline" do %>
+  			<%= check_box_tag :remember_me %>
+  			<span>Se rappeler de moi</span>
+  			<% end %>
+			<br/>
+			<br/>
 
 			<%= submit_tag "Se connecter", class: "btn btn-dark" %>
 			<%= link_to "Pas de compte ?", new_user_path, class: "btn btn-outline-danger" %>
