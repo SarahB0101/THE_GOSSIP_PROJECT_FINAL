@@ -1,0 +1,82 @@
+<html>
+  <head>
+    <title>The Gossip Project</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  </head>
+  <body>
+
+
+
+	<!-------------------------- ERROR MESSAGE -------------------------->
+
+
+
+ 
+		<% if @comment.errors.any? %>
+			<div class="alert alert-danger" role="alert">
+	 			<p>Nous n'avons pas réussi à modifier le commentaire pour la (ou les) raison(s) suivante(s) :</p>
+			
+		  
+		  		<ul>
+		    		<% @comment.errors.full_messages.each do |message| %>
+		     	 	<li><%= message %></li>
+		    		<% end %>
+		  		</ul>
+		  	</div>
+		<% end %> 
+
+
+
+    <!-------------------------- CONTAINER -------------------------->
+
+    <div class="container text-center">
+    	</br>
+	    </br>
+	    </br>
+	    </br>
+	    <h1>ÉDITER TON COMMENTAIRE</h1>
+	    </br>
+	    </br>
+
+
+		
+		
+		<%= form_tag url_for(action: 'update'), method: "put" do %>
+		  <%= label_tag 'Contenu' %>
+	      <%= text_area_tag 'content', '', class: "form-control", placeholder: "#{@comment.content}" %> 
+	      <br/> <br/>
+
+
+
+	      <%= submit_tag "Éditer mon commentaire", class: "btn btn-dark"%>
+	      <%= link_to "Supprimer le commentaire", gossip_comment_path(@comment.gossip, @comment), class: "btn btn-danger", method: :delete, data: { confirm: 'Es-tu sûr de vouloir supprimer ce commentaire?' }%>
+
+	    <% end %>
+		 
+
+
+	   
+	    
+	    </br>
+	    </br>
+	    </br>
+	    <p> <%= link_to 'Retour à l\'Accueil', index_path %></p>
+
+	</div>
+
+
+
+
+
+    <!-------------------------- SCRIPT -------------------------->
+
+
+
+
+
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </body>
+</html>

@@ -1,0 +1,58 @@
+<html>
+  <head>
+    <title>The Gossip Project</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  </head>
+  <body>
+
+    <!-------------------------- CONTAINER -------------------------->
+
+    <div class="container text-center">
+    	</br>
+	    </br>
+	    </br>
+	    </br>
+	    <h1>Voici la page de la ville <%= @city.name%> </h1>
+	    </br>
+	    </br>
+	    <% @city.gossips.each do |gossip| %>
+		 	<div class="card">
+				<div class="card-body">
+			  		<h3 class="card-title"><%=link_to gossip.title, gossip_path(gossip.id) %> </h3>
+			  		<p class="card-text"><%= gossip.user.first_name %></p>
+			          	
+			    </div>	
+	    	</div> 
+	    <% end %>
+
+		
+
+	 
+
+
+	   
+	    
+	    </br>
+	    </br>
+	    </br>
+	    <%= link_to 'Retour sur l\'accueil des gossips', index_path %>
+	    
+
+	</div>
+
+
+
+
+
+    <!-------------------------- SCRIPT -------------------------->
+
+
+
+
+
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </body>
+</html>

@@ -1,0 +1,68 @@
+<html>
+  <head>
+    <title>The Gossip Project</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  </head>
+  <body>
+
+
+
+  	<!-------------------------- SUCCESS MESSAGE-------------------------->
+
+  	<% if flash[:success_signin] %>
+			<div class="alert alert-success" role="alert">
+	 			<p>Vous êtes désormais connecté à votre espace</p>
+
+		  	</div>
+		<% end %>
+
+    <!-------------------------- CONTAINER -------------------------->
+
+    <div class="container text-center">
+	    <h1>Voici la page de <%= @first_name%> </h1>
+	    </br>
+	    </br>
+
+		<div class="card">
+			<div class="card-body">
+		  		<h3 class="card-title"><%= @users.first_name %> <%= @users.last_name %></h3>
+		  		<p class="card-text">
+		  			<%= @users.description %>
+		  			</br>Email : <%= @users.email %>
+		  			</br>Age :<%= @users.age %>
+		  			</br>City : <%= link_to "#{@users.city.name}", city_path(@users.city.id) %>
+		  		</p>
+		  		
+		      	    	
+		    </div>	
+    	</div>
+
+	 
+
+
+	   
+	    
+	    </br>
+	    </br>
+	    </br>
+	    <%= link_to 'Retour sur l\'accueil des gossips', index_path %>
+	    
+
+	</div>
+
+
+
+
+
+    <!-------------------------- SCRIPT -------------------------->
+
+
+
+
+
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </body>
+</html>

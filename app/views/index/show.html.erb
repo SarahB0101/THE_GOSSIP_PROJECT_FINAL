@@ -1,0 +1,114 @@
+<html>
+  <head>
+    <title>The Gossip Project</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  </head>
+  <body>
+
+
+	<!-------------------------- SUCCESS MESSAGE -------------------------->
+
+
+		<% if flash[:success] %>
+			<div class="alert alert-success" role="alert">
+	 			<p>Votre gossip à bien été enregistré ! </p>
+
+		  	</div>
+		<% end %> 
+
+
+ 
+		<% if flash[:success1] %>
+			<div class="alert alert-success" role="alert">
+	 			<p>Votre gossip a bien été supprimé ! </p>
+
+		  	</div>
+		<% end %> 
+
+		<% if flash[:success_user_signup] %>
+			<div class="alert alert-success" role="alert">
+	 			<p>Félicitations, vous êtes inscrits !</p>
+
+		  	</div>
+		<% end %>
+
+
+	<!-------------------------- CONTAINER -------------------------->
+
+	<div class="container justify-content-center">
+
+		<div class="row text-center ">
+			<div class="col-lg-12">
+				<br>
+				<br>
+				<br>
+				<br>
+				<h1 class="text-center">BIENVENUE <br> SUR THE GOSSIP PROJECT</h1>
+				<br/>
+				<p>The Hacking Project est une chouette formation, où la communauté est reine. Il se passe plein de choses à Rennes, Paris, Lyon, Montpellier, Bordeaux et c'est dur de connaître tous les gossips. Samuel et Sarah ont créé une application où tout le monde peut ajouter des gossips sur ses camarades moussaillons. </p>
+				<br/>
+				<br/>
+				<button class=" btn btn-outline-dark btn-outline-primary btn-lg"><%=link_to 'Créer un gossip', new_gossip_path %> </button>
+
+				<br/>	
+				<br/>
+				<br/>
+				<br/> 
+				<br/>	
+				<br/>
+				<br/>
+				<br/>
+			</div>	
+		</div>
+		
+
+		<div class="row justify-content-center">
+			<div class="col-lg-6">
+		<!-- Ici, on lui demande d'afficher pour chaque gossip, l'auteur + le contenu -->
+				<% Gossip.all.each do |gossip| %>
+					<div class="card text-center">
+						<div class="card-header">
+					  		<h3 class="card-title"><%=link_to gossip.title, gossip_path(gossip.id) %> </h3>
+						</div>
+
+					  	<div class="card-body">
+					  		<p class="card-text"><%= gossip.user.first_name %></p>
+					  	</div>
+					  	<div>	
+					  		<blockquote class="blockquote mb-0">
+							  			<footer class="blockquote-footer text-right">
+								  			<% gossip.tags.each do |tag|%>
+													<p># <%= tag.title%> </p>
+											<% end %>
+										</footer>	
+							</blockquote>
+					     
+						</div>	
+
+			    	</div>
+			    	<br>
+			    	<br>
+			    	<br>
+			    	<br>
+			    <% end %>
+
+			</div>
+		</div>
+
+	</div>
+
+
+
+	<!-------------------------- SCRIPT -------------------------->
+
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+
+
+
+
+</body>
+</html>

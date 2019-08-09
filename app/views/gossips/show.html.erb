@@ -1,0 +1,159 @@
+<html>
+  <head>
+    <title>The Gossip Project</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  </head>
+  <body>
+
+
+
+
+
+<!-------------------------- ERROR MESSAGE -------------------------->
+
+
+	<% if @comment.errors.any? %>
+			<div class="alert alert-danger" role="alert">
+	 			<p>Nous n'avons pas réussi à créer le commentaire pour la (ou les) raison(s) suivante(s) :</p>
+			
+		  
+		  		<ul>
+		    		<% @commentaire.errors.full_messages.each do |message| %>
+		     	 	<li><%= message %></li>
+		    		<% end %>
+		  		</ul>
+		  	</div>
+		<% end %> 
+
+
+
+
+	<!-------------------------- SUCCESS MESSAGE -------------------------->
+
+
+
+ 
+		<% if flash[:success] %>
+			<div class="alert alert-success" role="alert">
+	 			<p>Votre gossip a bien été modifié ! </p>
+
+		  	</div>
+		<% end %> 
+
+		<% if flash[:success1] %>
+			<div class="alert alert-success" role="alert">
+	 			<p>Votre commentaire a bien été créé ! </p>
+
+		  	</div>
+		<% end %> 
+
+		<% if flash[:success2] %>
+			<div class="alert alert-success" role="alert">
+	 			<p>Votre commentaire a bien été modifié ! </p>
+
+		  	</div>
+		<% end %> 
+
+		<% if flash[:success3] %>
+			<div class="alert alert-success" role="alert">
+	 			<p>Votre commentaire a bien été supprimé ! </p>
+
+		  	</div>
+		<% end %> 
+
+
+
+  
+    <!-------------------------- CONTAINER -------------------------->
+
+    <div class="container text-center">
+    	</br>
+	    </br>
+	    </br>
+	    </br>
+	    <h1>Voici la page du Gossip n°<%= @id%> </h1>
+	    </br>
+	    </br>
+
+		<div class="card">
+			<div class="card-body">
+		  		<h3 class="card-title"><%= @gossip.title %></h3>
+		  		<p class="card-text"><%= @gossip.content %></p>
+		  		<blockquote class="blockquote mb-0">
+		  			 <footer class="blockquote-footer text-right">
+		  			 	<%= link_to "#{@gossip.user.first_name}", user_path(@gossip.user.id) %><br>
+		  			 	<%= link_to "#{@gossip.user.city.name}", city_path(@gossip.user.city) %> 
+
+		  			 </footer></blockquote> 
+		  		<% if current_user == @gossip.user%>	 
+		      	<button class=" btn btn-outline-dark btn-lg" role="button" aria-pressed="true"><%=link_to 'Éditer le gossip ?', edit_gossip_path %> </button>	
+		      	
+		      	<a href="<%= gossip_path(@gossip.id)%>" class=" btn btn-outline-danger btn-lg" role="button" aria-pressed="true" data-confirm="Êtes-vous sûr de supprimer le gossip ?" data-method ="DELETE"> Suprimer le gossip ? </a>
+		      	<% end %>
+		    </div>
+    	</div>
+
+	 
+
+
+	   
+	    
+	    </br>
+	    </br>
+	    </br>
+
+
+		<h3>COMMENTAIRES (<%= @gossip.comments.count %>)</h3>
+			    </br>
+			    </br>
+			    <% @gossip.comments.each do |comment| %>
+				 	<div class="card">
+						<div class="card-body">
+					  		<h3 class="card-title"><%=link_to "#{comment.user.first_name}", user_path(comment.user.id) %> </h3>
+					  		<p class="card-text"><%= comment.content %></p>
+					  		<button class=" btn btn-outline-dark btn-lg"><%=link_to 'Éditer le commentaire', edit_gossip_comment_path(@gossip, comment) %> </button>
+
+					          	
+					    </div>	
+			    	</div> 
+			    <% end %>
+		</br>
+	    </br>
+	    </br>
+	    </br>
+	    <h4>AJOUTER UN COMMENTAIRE</h4>
+	    </br>
+	    </br>
+
+
+		
+		
+		<%= form_for([@gossip, @comment]) do |form| %>
+		<%= form.text_field :content, class: "form-control", placeholder:"Nouveau commentaire" %>
+		<br>
+		<%= form.submit "Ajouter", class: " btn btn-outline-dark btn-lg" %>
+		<% end %>
+
+	    </br>
+	    </br>
+	    </br>
+	    <%= link_to 'Retour sur l\'accueil des gossips', index_path %>
+
+	</div>
+
+
+
+
+
+    <!-------------------------- SCRIPT -------------------------->
+
+
+
+
+
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </body>
+</html>
