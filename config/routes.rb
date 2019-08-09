@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
  	
+  root 'index#show'
   resources :cities
   # get 'gossips/new', to: 'gossips#new' #on affiche le formulaire
   # post 'gossips', to: 'gossips#create' #puis on l'envoie
